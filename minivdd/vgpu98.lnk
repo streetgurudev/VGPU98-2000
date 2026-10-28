@@ -1,0 +1,30 @@
+; VGPU98 mini-VDD (vgpu98.vxd): link definition for vglink (spec/vglink.md).
+; One locked object: every function can run when the VDD traps a port.
+
+[module]
+format      = le
+name        = VGPU98
+description = "VGPU98 2000 display mini-VDD (Version 4.0)"
+ddb         = VGPU98_DDB
+ddk_version = 0x400
+
+[object LCOD]
+segments = _LTEXT _LDATA
+flags    = preload
+
+; A VxD (file type 5) whose subtype is its device ID, as Windows' own VxDs
+; give it (none: 0); its file version is the driver package's, its
+; product version the project's.
+[version]
+file_version         = 4.10.0.1
+product_version      = 1.0.0.0
+file_type            = 5        ; a VxD
+file_subtype         = 0        ; its device ID: none
+company              = "VGPU98 Project"
+description          = "VGPU98 2000 display mini-VDD"
+file_version_text    = "4.10.0.1"
+internal_name        = "VGPU98"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "VGPU98.VXD"
+product_name         = "VGPU98 2000"
+product_version_text = "1.0"

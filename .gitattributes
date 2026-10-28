@@ -1,0 +1,6 @@
+# Source files are hashed into the build manifest, so they must have identical bytes on every machine.
+* text=auto eol=lf
+
+*.bin binary
+*.rom binary
+*.zip binary

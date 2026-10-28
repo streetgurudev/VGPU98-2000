@@ -1,0 +1,61 @@
+; VGPU98 card definition: the single source of truth for the card's identity.
+; cardc turns this file into the BIOS include files and the 86Box device header.
+; Format: spec/card-definition.md
+
+[card]
+name          = "VGPU98 2000 (PCI)"     ; shown in 86Box's video card list
+internal_name = "vgpu98_pci"            ; 86Box configuration name; never change once released
+rom_path      = "roms/video/vgpu98/vgpu98.bin"
+
+[pci]
+vendor_id           = 0x9898   ; unassigned in pci.ids as of 2026-10-09
+device_id           = 0x2000
+revision            = 0x01
+class_code          = 0x030000 ; display controller, VGA compatible
+subsystem_vendor_id = 0x9898
+subsystem_id        = 0x2000
+bar0_size           = 0x10000   ; BAR0: register window, non-prefetchable
+bar1_size           = 0x8000000 ; BAR1: framebuffer aperture, prefetchable, fixed whatever the VRAM size (128 MB)
+rom_bar_size        = 0x8000
+
+[memory]
+vram_mb         = 8 16 32 64 128
+vram_default_mb = 128 ; 3DMark03 scored 3141 at 128 MB, 1783 at 64
+
+[bios]
+rom_size     = 32768
+version      = "1.00"
+revision     = 0x0100           ; PCI data structure "revision level of code"
+vendor_name  = "VGPU98 Project"
+product_name = "VGPU98 2000 PCI VGA"
+signon       = "VGPU98 2000 PCI VGA BIOS Version 1.00"
+copyright    = "Copyright (C) 2026 VGPU98 Project contributors"
+
+[registers]
+id_magic        = 0x38394756    ; BAR0 0x00: "VG98" in little-endian byte order
+hw_version      = 0x00030006    ; BAR0 0x04: hardware interface 3.6 (3.0's vertex pipeline and GPU page table, 3.1's PROFILE.FIXED8, 3.2's PROFILE.PROGRAMS, 3.3's PROFILE.DOWNLOAD, PROFILE.GLIDE and PROFILE.OGL, 3.4's hardware cursor, 3.5's gamma table, 3.6's V-sync overrides: spec/gpu-registers.md)
+profile         = 0x00007FFF    ; BAR0 0x08: the full profile (commands, 2D, 3D, ring and status in main memory, page table, vertex pipeline, DirectX 8 fixed function, programs, DOWNLOAD, Glide, OpenGL, the hardware cursor, gamma, V-sync overrides), 3D when the host's GPU starts
+command_set     = 0x00020007    ; BAR0 0x10: command set 2.7 (spec/gpu-commands.md)
+gpu_reserve     = 0x40000       ; top of video memory kept for the GPU: the ring and the driver's data
+debug_seq_index = 0xE0          ; sequencer index of the developer debug register
+
+[display]
+first_index = 0x80              ; display engine registers: SR80h-BFh (spec/display-engine.md)
+key         = 0x98              ; written to the first register to unlock the others
+id          = 0x98              ; read from SR81h
+revision    = 0x03              ; read from SR82h: double scan, REGS_BASE, GPU_RESET
+max_width   = 1920              ; the largest mode in display-modes.card
+max_height  = 1440
+refresh_min = 50
+refresh_max = 160
+
+[monitor]
+; The virtual monitor the card reports through DDC (EDID 1.3).
+vendor    = "VGP"               ; EDID manufacturer ID
+product   = 0x2000
+serial    = 1
+week      = 41
+year      = 2026
+name      = "VGPU98 Screen"
+size_mm   = 400 300             ; image size: a 20-inch 4:3 monitor
+preferred = 1024x768 75         ; detailed timing descriptor 1

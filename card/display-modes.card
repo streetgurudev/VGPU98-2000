@@ -1,0 +1,130 @@
+; VGPU98 display mode table: every extended mode the card offers, for the VBE BIOS,
+; the Windows driver and its INF. Format and rules: spec/modes.md
+;
+; [mode WIDTHxHEIGHT]
+;   desktop = 1   a Windows desktop mode at 8, 16 and 32 bpp (listed in the INF)
+;   enabled = 0   defined but offered nowhere (default 1)
+;   refresh = rates in Hz; the first is the default (VBE mode sets use it)
+;   vbe8, vbe15, vbe16, vbe32 = VBE mode number for that depth: a number, "auto"
+;                 (cardc assigns the next free OEM number from 120h, in file order)
+;                 or "none". Default: auto.
+;
+; The desktop resolutions and their refresh lists are the Voodoo3 1.07 Windows 9x
+; driver's. The low resolutions are game modes, offered through VBE only.
+
+; --- Low-resolution game modes (VBE only) ------------------------------------
+
+[mode 320x200]
+refresh = 70
+vbe15   = 0x10D
+vbe16   = 0x10E
+
+[mode 320x240]
+refresh = 60
+
+[mode 400x300]
+refresh = 60
+
+[mode 512x384]
+refresh = 60
+
+[mode 640x400]
+refresh = 70
+vbe8    = 0x100
+
+; --- Desktop modes (Voodoo3 list) --------------------------------------------
+
+[mode 640x480]
+desktop = 1
+refresh = 60 72 75 85 100 120 140 160
+vbe8    = 0x101
+vbe15   = 0x110
+vbe16   = 0x111
+
+[mode 800x600]
+desktop = 1
+refresh = 60 56 72 75 85 100 120 140 160
+vbe8    = 0x103
+vbe15   = 0x113
+vbe16   = 0x114
+
+[mode 960x720]
+desktop = 1
+refresh = 60 75 85
+
+[mode 1024x768]
+desktop = 1
+refresh = 60 70 75 85 100 120
+vbe8    = 0x105
+vbe15   = 0x116
+vbe16   = 0x117
+
+[mode 1152x864]
+desktop = 1
+refresh = 60 70 75 85 100 120
+
+[mode 1280x960]
+desktop = 1
+refresh = 60 75 85
+
+[mode 1280x1024]
+desktop = 1
+refresh = 60 75 85 100
+vbe8    = 0x107
+vbe15   = 0x119
+vbe16   = 0x11A
+
+[mode 1600x1024]
+desktop = 1
+refresh = 60 76 85
+
+[mode 1600x1200]
+desktop = 1
+refresh = 60 65 70 75 80 85 100
+
+[mode 1792x1344]
+desktop = 1
+refresh = 60 75
+
+[mode 1856x1392]
+desktop = 1
+refresh = 60 75
+
+[mode 1920x1080]
+desktop = 1
+refresh = 60 72 75 85
+
+[mode 1920x1200]
+desktop = 1
+refresh = 60 76 85
+
+[mode 1920x1440]
+desktop = 1
+refresh = 60 75
+
+; --- Extra widescreen modes, off by default ----------------------------------
+
+[mode 1280x720]
+desktop = 1
+enabled = 0
+refresh = 60 75
+
+[mode 1280x800]
+desktop = 1
+enabled = 0
+refresh = 60 75
+
+[mode 1360x768]
+desktop = 1
+enabled = 0
+refresh = 60 75
+
+[mode 1440x900]
+desktop = 1
+enabled = 0
+refresh = 60 75
+
+[mode 1680x1050]
+desktop = 1
+enabled = 0
+refresh = 60 75

@@ -1,0 +1,9 @@
+; vgpu98cp.cpl's exports: the Control Panel's
+; applet, the shell's class object and unload check, and the start-up entry
+; for rundll32, by their plain names. One name per line, sorted as the
+; export table; drvlint checks the DLL against them.
+
+CPlApplet
+DllCanUnloadNow
+DllGetClassObject
+vgpu98_apply

@@ -1,0 +1,49 @@
+; vgpu98cp.cpl: link definition for vglink (spec/vglink.md, spec/pe-format.md).
+; The VGPU98 2000's settings: a per-process PE DLL, loaded by
+; the Display Properties' Advanced dialog (its VGPU98 tab), by the Control
+; Panel (its VGPU98 2000 icon) and by rundll32 at start-up. It exports the
+; Control Panel's CPlApplet, the shell's DllGetClassObject and
+; DllCanUnloadNow, and vgpu98_apply, under their plain names, and imports from
+; KERNEL32, USER32, GDI32, COMCTL32 and ADVAPI32.
+
+[module]
+format = pe
+name   = vgpu98cp.cpl
+base   = 0x11C00000
+entry  = _DllMain@12
+shared = 0
+
+[imports KERNEL32.dll]
+symbols = __imp__GetModuleFileNameA@12
+
+[imports USER32.dll]
+symbols = __imp__GetDlgItem@8 __imp__SendMessageA@16 __imp__SetDlgItemTextA@12 __imp__EnableWindow@8 __imp__InvalidateRect@12 __imp__GetParent@4 __imp__SetWindowLongA@12 __imp__GetDC@4 __imp__ReleaseDC@8 __imp__FillRect@12 __imp__GetSysColor@4 __imp__GetSysColorBrush@4 __imp__LoadIconA@8 __imp__CreateIconIndirect@4
+
+[imports GDI32.dll]
+symbols = __imp__CreateDCA@16 __imp__DeleteDC@4 __imp__ExtEscape@24 __imp__GetDeviceCaps@8 __imp__GetDeviceGammaRamp@8 __imp__SetDeviceGammaRamp@8 __imp__CreatePen@12 __imp__CreateSolidBrush@4 __imp__SelectObject@8 __imp__DeleteObject@4 __imp__MoveToEx@16 __imp__LineTo@12 __imp__CreateCompatibleDC@4 __imp__CreateCompatibleBitmap@12 __imp__CreateBitmap@20
+
+[imports COMCTL32.dll]
+symbols = __imp__InitCommonControls@0 __imp__CreatePropertySheetPageA@4 __imp__DestroyPropertySheetPage@4 __imp__PropertySheetA@4
+
+[imports ADVAPI32.dll]
+symbols = __imp__RegCreateKeyExA@36 __imp__RegOpenKeyExA@20 __imp__RegQueryValueExA@24 __imp__RegSetValueExA@24 __imp__RegDeleteValueA@8 __imp__RegCloseKey@4
+
+[exports]
+names   = undecorated
+symbols = _CPlApplet@16 _DllCanUnloadNow@0 _DllGetClassObject@12 _vgpu98_apply@16
+
+; A DLL; its file version is the driver package's, its product version
+; the project's.
+[version]
+file_version         = 4.10.0.1
+product_version      = 1.0.0.0
+file_type            = 2        ; a DLL
+file_subtype         = 0
+company              = "VGPU98 Project"
+description          = "VGPU98 2000 display settings"
+file_version_text    = "4.10.0.1"
+internal_name        = "vgpu98cp"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "vgpu98cp.cpl"
+product_name         = "VGPU98 2000"
+product_version_text = "1.0"

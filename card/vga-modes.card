@@ -1,0 +1,463 @@
+; VGPU98 standard VGA mode tables.
+;
+; [param N]  One entry of the standard 29-entry video parameter table (64 bytes each).
+;            The BIOS programs the VGA registers for a mode from its entry, and the
+;            save pointer table at 40:A8 hands the same table to software that reads it.
+;            Register values follow the VGA standard. Layout: spec/vga-parameter-table.md
+; [mode N]   How the BIOS sets up each mode number 00h-13h.
+;
+; Byte lists are two-digit hex values. Register lists are in index order:
+;   seq  = sequencer 01h-04h (index 00h is the reset register and is not stored)
+;   crtc = CRT controller 00h-18h
+;   attr = attribute controller 00h-13h
+;   gc   = graphics controller 00h-08h
+
+; ---------------------------------------------------------------------------
+; 200-line text modes (CGA emulation, 8x8 characters, double-scanned)
+; ---------------------------------------------------------------------------
+
+[param 0x00]   ; mode 00h, 200 lines
+columns     = 40
+rows        = 25
+char_height = 8
+page_size   = 0x0800
+seq         = 09 03 00 02
+misc        = 63
+crtc        = 2D 27 28 90 2B A0 BF 1F 00 C7 06 07 00 00 00 00 9C 8E 8F 14 1F 96 B9 A3 FF
+attr        = 00 01 02 03 04 05 06 07 10 11 12 13 14 15 16 17 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x01]   ; mode 01h, 200 lines
+columns     = 40
+rows        = 25
+char_height = 8
+page_size   = 0x0800
+seq         = 09 03 00 02
+misc        = 63
+crtc        = 2D 27 28 90 2B A0 BF 1F 00 C7 06 07 00 00 00 00 9C 8E 8F 14 1F 96 B9 A3 FF
+attr        = 00 01 02 03 04 05 06 07 10 11 12 13 14 15 16 17 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x02]   ; mode 02h, 200 lines
+columns     = 80
+rows        = 25
+char_height = 8
+page_size   = 0x1000
+seq         = 01 03 00 02
+misc        = 63
+crtc        = 5F 4F 50 82 55 81 BF 1F 00 C7 06 07 00 00 00 00 9C 8E 8F 28 1F 96 B9 A3 FF
+attr        = 00 01 02 03 04 05 06 07 10 11 12 13 14 15 16 17 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x03]   ; mode 03h, 200 lines
+columns     = 80
+rows        = 25
+char_height = 8
+page_size   = 0x1000
+seq         = 01 03 00 02
+misc        = 63
+crtc        = 5F 4F 50 82 55 81 BF 1F 00 C7 06 07 00 00 00 00 9C 8E 8F 28 1F 96 B9 A3 FF
+attr        = 00 01 02 03 04 05 06 07 10 11 12 13 14 15 16 17 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+; ---------------------------------------------------------------------------
+; CGA graphics modes
+; ---------------------------------------------------------------------------
+
+[param 0x04]   ; mode 04h, 320x200, 4 colours
+columns     = 40
+rows        = 25
+char_height = 8
+page_size   = 0x4000
+seq         = 09 03 00 02
+misc        = 63
+crtc        = 2D 27 28 90 2B 80 BF 1F 00 C1 00 00 00 00 00 00 9C 8E 8F 14 00 96 B9 A2 FF
+attr        = 00 13 15 17 02 04 06 07 10 11 12 13 14 15 16 17 01 00 03 00
+gc          = 00 00 00 00 00 30 0F 00 FF
+
+[param 0x05]   ; mode 05h, 320x200, 4 colours
+columns     = 40
+rows        = 25
+char_height = 8
+page_size   = 0x4000
+seq         = 09 03 00 02
+misc        = 63
+crtc        = 2D 27 28 90 2B 80 BF 1F 00 C1 00 00 00 00 00 00 9C 8E 8F 14 00 96 B9 A2 FF
+attr        = 00 13 15 17 02 04 06 07 10 11 12 13 14 15 16 17 01 00 03 00
+gc          = 00 00 00 00 00 30 0F 00 FF
+
+[param 0x06]   ; mode 06h, 640x200, 2 colours
+columns     = 80
+rows        = 25
+char_height = 8
+page_size   = 0x4000
+seq         = 01 01 00 06
+misc        = 63
+crtc        = 5F 4F 50 82 54 80 BF 1F 00 C1 00 00 00 00 00 00 9C 8E 8F 28 00 96 B9 C2 FF
+attr        = 00 17 17 17 17 17 17 17 17 17 17 17 17 17 17 17 01 00 01 00
+gc          = 00 00 00 00 00 00 0D 00 FF
+
+; ---------------------------------------------------------------------------
+; Monochrome text, 350 lines
+; ---------------------------------------------------------------------------
+
+[param 0x07]   ; mode 07h, 350 lines, 9x14 characters
+columns     = 80
+rows        = 25
+char_height = 14
+page_size   = 0x1000
+seq         = 00 03 00 03
+misc        = A6
+crtc        = 5F 4F 50 82 55 81 BF 1F 00 4D 0B 0C 00 00 00 00 83 85 5D 28 0D 63 BA A3 FF
+attr        = 00 08 08 08 08 08 08 08 10 18 18 18 18 18 18 18 0E 00 0F 08
+gc          = 00 00 00 00 00 10 0A 00 FF
+
+; ---------------------------------------------------------------------------
+; Entries 08h-0Ch belong to modes VGA does not implement. Stored as zeros.
+; ---------------------------------------------------------------------------
+
+[param 0x08]
+reserved = yes
+
+[param 0x09]
+reserved = yes
+
+[param 0x0A]
+reserved = yes
+
+[param 0x0B]
+reserved = yes
+
+[param 0x0C]
+reserved = yes
+
+; ---------------------------------------------------------------------------
+; EGA-class 16-colour graphics, 200 lines
+; ---------------------------------------------------------------------------
+
+[param 0x0D]   ; mode 0Dh, 320x200, 16 colours
+columns     = 40
+rows        = 25
+char_height = 8
+page_size   = 0x2000
+seq         = 09 0F 00 06
+misc        = 63
+crtc        = 2D 27 28 90 2B 80 BF 1F 00 C0 00 00 00 00 00 00 9C 8E 8F 14 00 96 B9 E3 FF
+attr        = 00 01 02 03 04 05 06 07 10 11 12 13 14 15 16 17 01 00 0F 00
+gc          = 00 00 00 00 00 00 05 0F FF
+
+[param 0x0E]   ; mode 0Eh, 640x200, 16 colours
+columns     = 80
+rows        = 25
+char_height = 8
+page_size   = 0x4000
+seq         = 01 0F 00 06
+misc        = 63
+crtc        = 5F 4F 50 82 54 80 BF 1F 00 C0 00 00 00 00 00 00 9C 8E 8F 28 00 96 B9 E3 FF
+attr        = 00 01 02 03 04 05 06 07 10 11 12 13 14 15 16 17 01 00 0F 00
+gc          = 00 00 00 00 00 00 05 0F FF
+
+; ---------------------------------------------------------------------------
+; Entries 0Fh and 10h describe modes 0Fh and 10h on a 64 KB EGA. The card always
+; has more than 64 KB, so the BIOS never uses them; they repeat entries 11h and 12h.
+; ---------------------------------------------------------------------------
+
+[param 0x0F]   ; mode 0Fh (64 KB form), same as entry 11h
+columns     = 80
+rows        = 25
+char_height = 14
+page_size   = 0x8000
+seq         = 01 0F 00 06
+misc        = A2
+crtc        = 5F 4F 50 82 54 80 BF 1F 00 40 00 00 00 00 00 00 83 85 5D 28 0F 63 BA E3 FF
+attr        = 00 08 00 00 18 18 00 00 00 08 00 00 00 18 00 00 0B 00 05 00
+gc          = 00 00 00 00 00 00 05 05 FF
+
+[param 0x10]   ; mode 10h (64 KB form), same as entry 12h
+columns     = 80
+rows        = 25
+char_height = 14
+page_size   = 0x8000
+seq         = 01 0F 00 06
+misc        = A3
+crtc        = 5F 4F 50 82 54 80 BF 1F 00 40 00 00 00 00 00 00 83 85 5D 28 0F 63 BA E3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 01 00 0F 00
+gc          = 00 00 00 00 00 00 05 0F FF
+
+; ---------------------------------------------------------------------------
+; 350-line graphics
+; ---------------------------------------------------------------------------
+
+[param 0x11]   ; mode 0Fh, 640x350 monochrome
+columns     = 80
+rows        = 25
+char_height = 14
+page_size   = 0x8000
+seq         = 01 0F 00 06
+misc        = A2
+crtc        = 5F 4F 50 82 54 80 BF 1F 00 40 00 00 00 00 00 00 83 85 5D 28 0F 63 BA E3 FF
+attr        = 00 08 00 00 18 18 00 00 00 08 00 00 00 18 00 00 0B 00 05 00
+gc          = 00 00 00 00 00 00 05 05 FF
+
+[param 0x12]   ; mode 10h, 640x350, 16 colours
+columns     = 80
+rows        = 25
+char_height = 14
+page_size   = 0x8000
+seq         = 01 0F 00 06
+misc        = A3
+crtc        = 5F 4F 50 82 54 80 BF 1F 00 40 00 00 00 00 00 00 83 85 5D 28 0F 63 BA E3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 01 00 0F 00
+gc          = 00 00 00 00 00 00 05 0F FF
+
+; ---------------------------------------------------------------------------
+; 350-line text modes (8x14 characters)
+; ---------------------------------------------------------------------------
+
+[param 0x13]   ; mode 00h, 350 lines
+columns     = 40
+rows        = 25
+char_height = 14
+page_size   = 0x0800
+seq         = 09 03 00 02
+misc        = A3
+crtc        = 2D 27 28 90 2B A0 BF 1F 00 4D 0B 0C 00 00 00 00 83 85 5D 14 1F 63 BA A3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x14]   ; mode 01h, 350 lines
+columns     = 40
+rows        = 25
+char_height = 14
+page_size   = 0x0800
+seq         = 09 03 00 02
+misc        = A3
+crtc        = 2D 27 28 90 2B A0 BF 1F 00 4D 0B 0C 00 00 00 00 83 85 5D 14 1F 63 BA A3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x15]   ; mode 02h, 350 lines
+columns     = 80
+rows        = 25
+char_height = 14
+page_size   = 0x1000
+seq         = 01 03 00 02
+misc        = A3
+crtc        = 5F 4F 50 82 55 81 BF 1F 00 4D 0B 0C 00 00 00 00 83 85 5D 28 1F 63 BA A3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x16]   ; mode 03h, 350 lines
+columns     = 80
+rows        = 25
+char_height = 14
+page_size   = 0x1000
+seq         = 01 03 00 02
+misc        = A3
+crtc        = 5F 4F 50 82 55 81 BF 1F 00 4D 0B 0C 00 00 00 00 83 85 5D 28 1F 63 BA A3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 08 00 0F 00
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+; ---------------------------------------------------------------------------
+; 400-line text modes (9x16 characters). Mode 03h here is the default DOS screen.
+; ---------------------------------------------------------------------------
+
+[param 0x17]   ; modes 00h and 01h, 400 lines
+columns     = 40
+rows        = 25
+char_height = 16
+page_size   = 0x0800
+seq         = 08 03 00 02
+misc        = 67
+crtc        = 2D 27 28 90 2B A0 BF 1F 00 4F 0D 0E 00 00 00 00 9C 8E 8F 14 1F 96 B9 A3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 0C 00 0F 08
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x18]   ; modes 02h and 03h, 400 lines
+columns     = 80
+rows        = 25
+char_height = 16
+page_size   = 0x1000
+seq         = 00 03 00 02
+misc        = 67
+crtc        = 5F 4F 50 82 55 81 BF 1F 00 4F 0D 0E 00 00 00 00 9C 8E 8F 28 1F 96 B9 A3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 0C 00 0F 08
+gc          = 00 00 00 00 00 10 0E 00 FF
+
+[param 0x19]   ; mode 07h, 400 lines
+columns     = 80
+rows        = 25
+char_height = 16
+page_size   = 0x1000
+seq         = 00 03 00 02
+misc        = 66
+crtc        = 5F 4F 50 82 55 81 BF 1F 00 4F 0D 0E 00 00 00 00 9C 8E 8F 28 0F 96 B9 A3 FF
+attr        = 00 08 08 08 08 08 08 08 10 18 18 18 18 18 18 18 0E 00 0F 08
+gc          = 00 00 00 00 00 10 0A 00 FF
+
+; ---------------------------------------------------------------------------
+; VGA graphics modes
+; ---------------------------------------------------------------------------
+
+[param 0x1A]   ; mode 11h, 640x480, 2 colours
+columns     = 80
+rows        = 30
+char_height = 16
+page_size   = 0xA000
+seq         = 01 0F 00 06
+misc        = E3
+crtc        = 5F 4F 50 82 54 80 0B 3E 00 40 00 00 00 00 00 00 EA 8C DF 28 00 E7 04 C3 FF
+attr        = 00 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 01 00 0F 00
+gc          = 00 00 00 00 00 00 05 01 FF
+
+[param 0x1B]   ; mode 12h, 640x480, 16 colours
+columns     = 80
+rows        = 30
+char_height = 16
+page_size   = 0xA000
+seq         = 01 0F 00 06
+misc        = E3
+crtc        = 5F 4F 50 82 54 80 0B 3E 00 40 00 00 00 00 00 00 EA 8C DF 28 00 E7 04 E3 FF
+attr        = 00 01 02 03 04 05 14 07 38 39 3A 3B 3C 3D 3E 3F 01 00 0F 00
+gc          = 00 00 00 00 00 00 05 0F FF
+
+[param 0x1C]   ; mode 13h, 320x200, 256 colours
+columns     = 40
+rows        = 25
+char_height = 8
+page_size   = 0x2000
+seq         = 01 0F 00 0E
+misc        = 63
+crtc        = 5F 4F 50 82 54 80 BF 1F 00 41 00 00 00 00 00 00 9C 8E 8F 28 40 96 B9 A3 FF
+attr        = 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 41 00 0F 00
+gc          = 00 00 00 00 00 40 05 0F FF
+
+; ===========================================================================
+; Mode descriptors
+;   model    = text | cga4 | cga2 | planar | vga256 | none
+;   mono     = 1 for modes on the monochrome ports (3B4h/3BAh); the segment is set separately
+;   segment  = screen memory segment
+;   params   = parameter entry; text modes list three: 200, 350 and 400 lines
+;   palettes = DAC palette loaded on mode set, one per params entry:
+;              cga64 | ega64 | mono64 | vga256
+; ===========================================================================
+
+[mode 0x00]
+model    = text
+mono     = 0
+segment  = 0xB800
+params   = 0x00 0x13 0x17
+palettes = cga64 ega64 ega64
+
+[mode 0x01]
+model    = text
+mono     = 0
+segment  = 0xB800
+params   = 0x01 0x14 0x17
+palettes = cga64 ega64 ega64
+
+[mode 0x02]
+model    = text
+mono     = 0
+segment  = 0xB800
+params   = 0x02 0x15 0x18
+palettes = cga64 ega64 ega64
+
+[mode 0x03]
+model    = text
+mono     = 0
+segment  = 0xB800
+params   = 0x03 0x16 0x18
+palettes = cga64 ega64 ega64
+
+[mode 0x04]
+model    = cga4
+mono     = 0
+segment  = 0xB800
+params   = 0x04
+palettes = cga64
+
+[mode 0x05]
+model    = cga4
+mono     = 0
+segment  = 0xB800
+params   = 0x05
+palettes = cga64
+
+[mode 0x06]
+model    = cga2
+mono     = 0
+segment  = 0xB800
+params   = 0x06
+palettes = cga64
+
+[mode 0x07]   ; 200 lines is not a monochrome option; the 350-line entry is used instead
+model    = text
+mono     = 1
+segment  = 0xB000
+params   = 0x07 0x07 0x19
+palettes = mono64 mono64 mono64
+
+[mode 0x08]
+model = none
+
+[mode 0x09]
+model = none
+
+[mode 0x0A]
+model = none
+
+[mode 0x0B]
+model = none
+
+[mode 0x0C]
+model = none
+
+[mode 0x0D]
+model    = planar
+mono     = 0
+segment  = 0xA000
+params   = 0x0D
+palettes = cga64
+
+[mode 0x0E]
+model    = planar
+mono     = 0
+segment  = 0xA000
+params   = 0x0E
+palettes = cga64
+
+[mode 0x0F]
+model    = planar
+mono     = 1
+segment  = 0xA000
+params   = 0x11
+palettes = mono64
+
+[mode 0x10]
+model    = planar
+mono     = 0
+segment  = 0xA000
+params   = 0x12
+palettes = ega64
+
+[mode 0x11]
+model    = planar
+mono     = 0
+segment  = 0xA000
+params   = 0x1A
+palettes = ega64
+
+[mode 0x12]
+model    = planar
+mono     = 0
+segment  = 0xA000
+params   = 0x1B
+palettes = ega64
+
+[mode 0x13]
+model    = vga256
+mono     = 0
+segment  = 0xA000
+params   = 0x1C
+palettes = vga256

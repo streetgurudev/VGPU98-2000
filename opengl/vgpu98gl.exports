@@ -1,0 +1,22 @@
+; vgpu98gl.dll's exports: the ICD interface Windows' opengl32.dll calls, by
+; their plain names. One name per line,
+; sorted as the export table; drvlint checks the DLL against them.
+
+DrvCopyContext
+DrvCreateContext
+DrvCreateLayerContext
+DrvDeleteContext
+DrvDescribeLayerPlane
+DrvDescribePixelFormat
+DrvGetLayerPaletteEntries
+DrvGetProcAddress
+DrvRealizeLayerPalette
+DrvReleaseContext
+DrvSetCallbackProcs
+DrvSetContext
+DrvSetLayerPaletteEntries
+DrvSetPixelFormat
+DrvShareLists
+DrvSwapBuffers
+DrvSwapLayerBuffers
+DrvValidateVersion

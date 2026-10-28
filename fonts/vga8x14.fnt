@@ -1,0 +1,12 @@
+; VGPU98 8x14 font, code page 437. Original design for this project.
+; Used by 350-line text modes and modes 0Fh and 10h. Format: spec/font-format.md.
+;
+; Derived from the 8x16 design by dropping its top and bottom rows, so the two
+; sizes share one source. The 8x16 design keeps those rows blank except in
+; cell-spanning glyphs, and fontc stops if deriving would cut pixels off any
+; other glyph. A glyph that needs a different shape at 14 rows is drawn again
+; below the derive line.
+
+font 8x14
+derive vga8x16.fnt drop-rows 0 15
+lines 6 5 7 3 2 4

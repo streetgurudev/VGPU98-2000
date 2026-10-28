@@ -1,0 +1,45 @@
+; glide2x.dll: link definition for vglink (spec/vglink.md, spec/pe-format.md).
+; A per-process PE DLL, as a Voodoo3's: its data belongs to the program that
+; loads it. It exports exactly a Voodoo3's glide2x.dll's names, decorated
+; (glide2x.exports), and imports from KERNEL32, GDI32, USER32 and DDRAW, as a Voodoo3's does.
+
+[module]
+format = pe
+name   = glide2x.dll
+base   = 0x10000000
+entry  = _DllMain@12
+shared = 0
+
+[imports KERNEL32.dll]
+symbols = __imp__GetModuleFileNameA@12 __imp__Sleep@4 __imp__GetSystemDirectoryA@8 __imp__GetEnvironmentStringsA@0 __imp__FreeEnvironmentStringsA@4 __imp__GetTickCount@0 __imp__GetCurrentProcessId@0 __imp__GetCurrentThreadId@0 __imp__CreateFileA@28 __imp__ReadFile@20 __imp__SetFilePointer@16 __imp__CloseHandle@4 __imp__SetUnhandledExceptionFilter@4 __imp__IsBadReadPtr@8
+
+[imports GDI32.dll]
+symbols = __imp__CreateDCA@16 __imp__ExtEscape@24 __imp__DeleteDC@4
+
+[imports USER32.dll]
+symbols = __imp__GetActiveWindow@0 __imp__GetForegroundWindow@0 __imp__GetClassNameA@12 __imp__GetWindowTextA@12 __imp__GetWindowRect@8 __imp__GetWindowLongA@8 __imp__GetWindowThreadProcessId@8
+
+[imports DDRAW.dll]
+symbols = __imp__DirectDrawCreate@12
+
+[exports]
+names = decorated
+file  = glide2x.exports
+
+; The final Voodoo3 release's Glide 2 version (2.61.00.0658), as
+; grGlideGetVersion gives it, typed as a Voodoo3's Glide DLLs are: an
+; installable driver. Never older than a Voodoo3's copy, so Windows
+; replaces one without asking.
+[version]
+file_version         = 2.61.0.658
+product_version      = 2.61.0.658
+file_type            = 3        ; a driver
+file_subtype         = 8        ; installable
+company              = "VGPU98 Project"
+description          = "VGPU98 2000 driver for Glide 2 programs"
+file_version_text    = "2.61.00.0658"
+internal_name        = "glide2x"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "glide2x.dll"
+product_name         = "VGPU98 2000"
+product_version_text = "2.61.00.0658"

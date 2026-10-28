@@ -1,0 +1,20 @@
+; drvlint --strict --vxd must refuse: no version resource (le.lnk without one).
+
+[module]
+format      = le
+name        = VGTEST
+description = "VGTEST test VxD"
+ddb         = TEST_DDB
+device_id   = 0x1234
+ddk_version = 0x40a
+
+[object LCOD]
+segments = _LTEXT _LDATA
+flags    = preload
+
+[object PCOD]
+segments = _BIG
+
+[object ICOD]
+segments = _ITEXT
+flags    = discardable

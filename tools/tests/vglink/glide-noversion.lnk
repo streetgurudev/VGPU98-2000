@@ -1,0 +1,12 @@
+; drvlint --glide must refuse: no version resource.
+
+[module]
+format = pe
+name   = test.dll
+base   = 0x10000000
+entry  = _DllMain@12
+shared = 0
+
+[exports]
+names = decorated
+file  = pe.exports

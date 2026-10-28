@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "release",
+            "displayName": "Release (exe -> ../bin, next to roms)",
+            "description": "Release build. 86Box.exe is written to <project>/bin, outside the build tree, so cleaning or deleting build/ never touches bin/roms.",
+            "inherits": "regular",
+            "cacheVariables": {
+                "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceParentDir}/bin"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "release",
+            "configurePreset": "release"
+        }
+    ]
+}

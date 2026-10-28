@@ -1,0 +1,22 @@
+; vglink negative tests (NE): the definition most BAD_* objects link with.
+
+[module]
+format      = ne
+name        = BAD
+description = "vglink negative test"
+data        = _DATA
+
+[segment _TEXT]
+type = code
+
+[segment _DATA]
+type = data
+
+[segment _OTHER]
+type = code
+
+[exports]
+1 = Entry
+
+[imports DIBENG]
+1 = ImpFar

@@ -1,0 +1,8 @@
+# Local-only material: the reference library and editor settings
+/archive/
+/.claude/
+
+# Build output
+/bin/
+/build/
+/dist/

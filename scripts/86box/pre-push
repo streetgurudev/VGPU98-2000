@@ -1,0 +1,20 @@
+#!/bin/sh
+# VGPU98: never push to the official 86Box repository.
+# Arguments from git: $1 = remote name, $2 = remote URL.
+
+remote="$1"
+url="$2"
+
+if [ "$remote" = "upstream" ]; then
+    echo "pre-push: refusing to push to 'upstream' (official 86Box). Push to your own fork instead." >&2
+    exit 1
+fi
+
+case "$(printf '%s' "$url" | tr 'A-Z' 'a-z')" in
+    *86box/86box*)
+        echo "pre-push: refusing to push to $url (official 86Box). Push to your own fork instead." >&2
+        exit 1
+        ;;
+esac
+
+exit 0

@@ -1,0 +1,35 @@
+; VGPU98 DirectX driver (vgpu98dx.dll): link definition for vglink
+; (spec/vglink.md, spec/pe-format.md). A PE DLL in Windows 98's shared system
+; arena, every section shared, importing only from KERNEL32 by name
+; (spec/directx-hal.md).
+
+[module]
+format      = pe
+name        = vgpu98dx.dll
+base        = 0xB00B0000
+entry       = _DllMain@12
+
+; Imports and exports are stdcall symbols; their names are the undecorated
+; ones (__imp__Sleep@4 imports Sleep, _DriverInit@4 exports DriverInit).
+[imports KERNEL32.dll]
+symbols = __imp__GetTickCount@0 __imp__GetCurrentProcessId@0 __imp__Sleep@4 __imp__CreateFileA@28 __imp__DeviceIoControl@32 __imp__CloseHandle@4 __imp__VirtualAlloc@16 __imp__VirtualFree@12 __imp__OpenProcess@12 __imp__GetExitCodeProcess@8 __imp__GetLastError@0 __imp__GetCurrentThreadId@0 __imp__RtlUnwind@16 __imp__GetModuleFileNameA@12
+
+[exports]
+symbols = _DriverInit@4
+
+; Typed as an installable driver, as a Voodoo3's DirectX driver DLL is
+; (facts only: its version resource); its file version is the driver
+; package's, its product version the project's.
+[version]
+file_version         = 4.10.0.1
+product_version      = 1.0.0.0
+file_type            = 3        ; a driver
+file_subtype         = 8        ; installable
+company              = "VGPU98 Project"
+description          = "VGPU98 2000 DirectX driver"
+file_version_text    = "4.10.0.1"
+internal_name        = "vgpu98dx"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "vgpu98dx.dll"
+product_name         = "VGPU98 2000"
+product_version_text = "1.0"

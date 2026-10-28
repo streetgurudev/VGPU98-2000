@@ -1,0 +1,11 @@
+; vglink must refuse: the list names a symbol the objects do not define.
+
+[module]
+format = pe
+name   = test.dll
+base   = 0x10000000
+shared = 0
+
+[exports]
+names = decorated
+file  = pe-missing.exports

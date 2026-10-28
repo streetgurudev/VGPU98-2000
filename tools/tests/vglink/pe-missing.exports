@@ -1,0 +1,5 @@
+; An export list naming a symbol pe.asm does not define.
+
+_TestOne@4
+_TestThree@4
+__TestTwo@8

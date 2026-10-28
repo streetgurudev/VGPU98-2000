@@ -1,0 +1,11 @@
+; vglink must refuse: 'names' is neither undecorated nor decorated.
+
+[module]
+format = pe
+name   = test.dll
+base   = 0x10000000
+shared = 0
+
+[exports]
+names = sideways
+file  = pe.exports

@@ -1,0 +1,4 @@
+[submodule "86Box"]
+	path = 86Box
+	url = ../86Box-VGPU98.git
+	branch = vgpu98

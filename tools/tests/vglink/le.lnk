@@ -1,0 +1,36 @@
+; vglink test module (LE): what test_vglink expects is worked out in le.asm.
+
+[module]
+format      = le
+name        = VGTEST
+description = "VGTEST test VxD"
+ddb         = TEST_DDB
+device_id   = 0x1234
+ddk_version = 0x40a
+
+[object LCOD]
+segments = _LTEXT _LDATA
+flags    = preload
+
+[object PCOD]
+segments = _BIG
+
+[object ICOD]
+segments = _ITEXT
+flags    = discardable
+
+; A VxD's version information: file type 5, the subtype its device ID
+; (test_vglink checks the record and the fields).
+[version]
+file_version         = 4.10.0.1
+product_version      = 4.10.0.1
+file_type            = 5
+file_subtype         = 0x1234
+company              = "VGPU98 Project"
+description          = "VGTEST test VxD"
+file_version_text    = "4.10.0.1"
+internal_name        = "VGTEST"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "VGTEST.VXD"
+product_name         = "VGPU98 2000"
+product_version_text = "4.10.0.1"

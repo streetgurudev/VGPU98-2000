@@ -1,0 +1,4 @@
+; The test DLL's exports (pe.lnk), as written.
+
+_TestOne@4
+__TestTwo@8

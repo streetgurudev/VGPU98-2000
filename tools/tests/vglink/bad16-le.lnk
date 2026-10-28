@@ -1,0 +1,10 @@
+; vglink negative test: 16-bit segments in an LE link.
+
+[module]
+format      = le
+name        = BAD
+description = "vglink negative test"
+ddb         = Entry
+
+[object LCOD]
+segments = _TEXT _DATA

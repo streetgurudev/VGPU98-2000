@@ -1,0 +1,10 @@
+; Card definition for the romlint tests: only the keys romlint reads.
+
+[pci]
+vendor_id  = 0x9898
+device_id  = 0x2000
+class_code = 0x030000
+
+[bios]
+rom_size = 512
+revision = 0x0100

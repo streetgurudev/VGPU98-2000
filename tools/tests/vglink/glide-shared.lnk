@@ -1,0 +1,25 @@
+; drvlint --glide must refuse: every section shared, as the DirectX DLL's are.
+
+[module]
+format = pe
+name   = test.dll
+base   = 0x10000000
+entry  = _DllMain@12
+
+[exports]
+names = decorated
+file  = pe.exports
+
+[version]
+file_version         = 2.61.0.658
+product_version      = 2.61.0.658
+file_type            = 3        ; a driver
+file_subtype         = 8        ; installable
+company              = "VGPU98 Project"
+description          = "vglink's PE test DLL"
+file_version_text    = "2.61.00.0658"
+internal_name        = "test"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "test.dll"
+product_name         = "VGPU98 2000"
+product_version_text = "2.61.00.0658"

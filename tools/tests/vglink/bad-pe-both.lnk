@@ -1,0 +1,10 @@
+; vglink must refuse: [exports] with both a symbol list and a list file.
+
+[module]
+format = pe
+name   = test.dll
+base   = 0x10000000
+
+[exports]
+symbols = _TestOne@4
+file    = pe.exports

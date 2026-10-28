@@ -1,0 +1,135 @@
+; VGPU98 display driver (vgpu98.drv): link definition for vglink (spec/vglink.md).
+; Export ordinals are the Windows display driver interface's; import ordinals
+; were checked against Windows 98's KRNL386.EXE and DIBENG.DLL
+; (spec/win98-display-driver.md).
+
+[module]
+format      = ne
+name        = DISPLAY
+description = "DISPLAY : 100, 96, 96 : VGPU98 2000 display driver"
+entry       = DriverInit
+data        = _DATA
+windows     = 0x400
+
+[segment _TEXT]
+type = code
+
+[segment _DATA]
+type = data
+
+[exports]
+1   = BitBlt
+2   = ColorInfo
+3   = Control
+4   = Disable
+5   = Enable
+6   = EnumDFonts
+7   = EnumObj
+8   = Output
+9   = Pixel
+10  = RealizeObject
+11  = StrBlt
+12  = ScanLR
+13  = DeviceMode nodata
+14  = ExtTextOut
+15  = GetCharWidth nodata
+16  = DeviceBitmap nodata
+17  = FastBorder
+18  = SetAttribute nodata
+19  = DibBlt
+20  = CreateDIBitmap
+21  = DibToDevice
+22  = SetPalette
+23  = GetPalette
+24  = SetPaletteTranslate
+25  = GetPaletteTranslate
+26  = UpdateColors
+27  = StretchBlt
+28  = StretchDIBits
+29  = SelectBitmap
+30  = BitmapBits
+31  = ReEnable
+32  = DDIGammaRamp
+101 = Inquire
+102 = SetCursor
+103 = MoveCursor
+104 = CheckCursor
+450 = GetDriverResourceID
+500 = UserRepaintDisable
+700 = ValidateMode resident      ; Windows finds this one by name
+
+[imports KERNEL]
+47  = GetModuleHandle
+50  = GetProcAddress
+170 = AllocCStoDSAlias
+176 = FreeSelector
+230 = GlobalSmartPageLock
+
+[imports DIBENG]
+1   = DIB_BitBlt
+2   = DIB_ColorInfo
+3   = DIB_Control
+5   = DIB_Enable
+6   = DIB_EnumDFonts
+8   = DIB_Output
+9   = DIB_Pixel
+11  = DIB_StrBlt
+12  = DIB_ScanLR
+13  = DIB_DeviceMode
+14  = DIB_ExtTextOut
+15  = DIB_GetCharWidth
+16  = DIB_DeviceBitmap
+17  = DIB_FastBorder
+18  = DIB_SetAttribute
+20  = DIB_CreateDIBitmap
+21  = DIB_DibToDevice
+27  = DIB_StretchBlt
+28  = DIB_StretchDIBits
+29  = DIB_SelectBitmap
+30  = DIB_BitmapBits
+101 = DIB_Inquire
+102 = DIB_SetCursorExt
+103 = DIB_MoveCursorExt
+104 = DIB_CheckCursorExt
+105 = DIB_BeginAccess
+106 = DIB_EndAccess
+300 = CreateDIBPDevice
+400 = DIB_RealizeObjectExt
+401 = DIB_DibBltExt
+402 = DIB_EnumObjExt
+404 = DIB_UpdateColorsExt
+405 = DIB_SetPaletteExt
+406 = DIB_GetPaletteExt
+407 = DIB_SetPaletteTranslateExt
+408 = DIB_GetPaletteTranslateExt
+
+[resource OEMBIN 1]
+file = config.bin
+
+[resource OEMBIN 2]
+file    = colortab.bin
+preload = 0
+
+[resource OEMBIN 3]
+file = fonts96.bin
+
+[resource OEMBIN FONTS]
+file    = fonts96.bin
+preload = 0
+
+[resource OEMBIN 2003]
+file = fonts120.bin
+
+[version]
+file_version         = 4.10.0.1
+product_version      = 1.0.0.0
+file_type            = 3        ; a driver
+file_subtype         = 4        ; display
+company              = "VGPU98 Project"
+description          = "VGPU98 2000 display driver"
+file_version_text    = "4.10.0.1"
+internal_name        = "DISPLAY"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "VGPU98.DRV"
+product_name         = "VGPU98 2000"
+product_version_text = "1.0"

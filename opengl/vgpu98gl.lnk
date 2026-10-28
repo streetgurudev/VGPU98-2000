@@ -1,0 +1,44 @@
+; vgpu98gl.dll: link definition for vglink (spec/vglink.md, spec/pe-format.md).
+; The OpenGL ICD: a per-process PE DLL,
+; its data the program's own, as the Glide DLLs are. It exports the ICD
+; interface's 18 functions under their plain names, and imports from
+; KERNEL32, GDI32, USER32 and DDRAW alone.
+
+[module]
+format = pe
+name   = vgpu98gl.dll
+base   = 0x11800000
+entry  = _DllMain@12
+shared = 0
+
+[imports KERNEL32.dll]
+symbols = __imp__TlsAlloc@0 __imp__TlsFree@4 __imp__TlsGetValue@4 __imp__TlsSetValue@8 __imp__GetProcessHeap@0 __imp__HeapAlloc@12 __imp__HeapReAlloc@16 __imp__HeapFree@12 __imp__Sleep@4 __imp__GetTickCount@0 __imp__GetCurrentProcessId@0 __imp__GetCurrentThreadId@0 __imp__SetLastError@4 __imp__GetModuleFileNameA@12 __imp__GetSystemDirectoryA@8 __imp__SetUnhandledExceptionFilter@4 __imp__IsBadReadPtr@8
+
+[imports GDI32.dll]
+symbols = __imp__CreateDCA@16 __imp__ExtEscape@24 __imp__DeleteDC@4
+
+[imports USER32.dll]
+symbols = __imp__WindowFromDC@4 __imp__GetClientRect@8 __imp__ClientToScreen@8 __imp__IsWindow@4
+
+[imports DDRAW.dll]
+symbols = __imp__DirectDrawCreate@12
+
+[exports]
+names   = undecorated
+symbols = _DrvCopyContext@12 _DrvCreateContext@4 _DrvCreateLayerContext@8 _DrvDeleteContext@4 _DrvDescribeLayerPlane@20 _DrvDescribePixelFormat@16 _DrvGetLayerPaletteEntries@20 _DrvGetProcAddress@4 _DrvRealizeLayerPalette@12 _DrvReleaseContext@4 _DrvSetCallbackProcs@8 _DrvSetContext@12 _DrvSetLayerPaletteEntries@20 _DrvSetPixelFormat@8 _DrvShareLists@8 _DrvSwapBuffers@4 _DrvSwapLayerBuffers@8 _DrvValidateVersion@4
+
+; Typed as an installable driver, as the Glide DLLs are; its file version
+; is the driver package's, its product version the project's.
+[version]
+file_version         = 4.10.0.1
+product_version      = 1.0.0.0
+file_type            = 3        ; a driver
+file_subtype         = 8        ; installable
+company              = "VGPU98 Project"
+description          = "VGPU98 2000 OpenGL driver"
+file_version_text    = "4.10.0.1"
+internal_name        = "vgpu98gl"
+copyright            = "Copyright 2026 VGPU98 Project contributors. GPL-2.0-or-later."
+original_name        = "vgpu98gl.dll"
+product_name         = "VGPU98 2000"
+product_version_text = "1.0"
