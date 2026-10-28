@@ -1,3 +1,26 @@
+This is an Opus 5.5 Vibe Coded experiment to hook a host GPU into 86box, using an "OLD API" -> Vulkan translation layer, one for Glide(only Unreal GOLD is tested), DirectX up to DX8, and OpenGL 1.1 + Q2 extensions.
+
+Hasn't been remotely fully tested, probably isn't too optimized. I don't know a single thing about coding, or maintaining a repo or project.
+
+It does successfully run 3DMark 99/00/01/03 and I've tried out a few games for each API
+
+But some of those specifically require DX 8.1, not DX9 installed, which some games may force install.
+
+Glide may need it's own specific virtual GPU and work, because those games really want to see a 3DFX ID and dlls sometimes to even install. But Unreal GOLD works. Other games might be able to force glide.
+
+I think it throws off 86box's performance % thingy, because games still run smooth at times, despite the P2 not being at 100% all the time. I run a 5800X3D + RX 9070 XT, haven't tested on other devices. The P2 may not be strong enough for some later DX8 titles itself, Morrowind boots for example, but even at 450mhz, assuming my 5800X3D can handle that, it a bit slow.
+
+I used Slot 1, [i440BX] ASUS P2B-LS, 128MB RAM, Pentium II(Deschutes) 300-450mhz
+
+Display [PCI]VGPU98 2000,
+ with the config set to 128MB of VRAM
+SoundBlaster 16 for sound
+Windows 98 SE
+
+Some games may require options tweaks, GTA3 for example needs "Trails" off
+
+---------
+
 # VGPU98 2000
 
 A virtual PCI graphics card for the [86Box](https://86box.net) emulator, with its own VGA/VBE BIOS and its own Windows 98 SE drivers. Inside the virtual machine it is an ordinary card of 1999 or 2000: the desktop up to 1920x1440, DirectDraw, Direct3D through DirectX 8's driver interface (hardware T&L, shaders 1.x), Glide 2 and 3 answering as a Voodoo3, and OpenGL 1.1. The 3D work is done by the host's GPU through Vulkan.
